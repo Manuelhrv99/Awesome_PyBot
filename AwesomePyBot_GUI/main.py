@@ -39,7 +39,14 @@ class MainWindow(QMainWindow):
         #Show window
         self.show()
 
-        
+        #Change the text when the button is pressed
+        self.toggle.stateChanged.connect(self.change_text)
+
+    def change_text(self, value):
+        if value:
+            self.label.setText("On")
+        else:
+            self.label.setText("Off")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
