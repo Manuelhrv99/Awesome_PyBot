@@ -50,8 +50,6 @@ class PyToggle(QCheckBox):
         #Start animation
         self.animation.start()
 
-        print(f"Status: {self.isChecked()}")
-
     #Set new hit area
     def hitButton(self, pos: QPoint):
         return self.contentsRect().contains(pos)
