@@ -25,26 +25,18 @@ Convert to fbs's project structure.
 Replace
 
     if __name__ == "__main__":
-    bot = Bot()
-
-    app = QApplication(sys.argv)
-
-    window = MainWindow()
-
-    sys.exit(app.exec())
+        bot = Bot()
+        app = QApplication(sys.argv)
+        window = MainWindow()
+        sys.exit(app.exec())
 
 With
 
     if __name__ == "__main__":
-
-    bot = Bot()
-
-    appctxt = ApplicationContext()
----
-    window = MainWindow()
-
-    sys.exit(appctxt.app.exec())
----
+        bot = Bot()
+        appctxt = ApplicationContext()
+        window = MainWindow()
+        sys.exit(appctxt.app.exec())
 
 `fbs startproject`
 
