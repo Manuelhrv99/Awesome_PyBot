@@ -6,7 +6,7 @@
 
 Open a command prompt in your project directory and execute the following:
 
-`%LOCALAPPDATA%\Programs\Python\Python39\python -m venv venv`
+`%LOCALAPPDATA%\Programs\Python\Python36\python -m venv venv`
 
 `call venv\Scripts\activate.bat`
 
@@ -24,6 +24,8 @@ Install the libraries.
 > 3rd Step
 
 Test that the app still works.
+
+`python main.py`
 
 > 4th Step
 

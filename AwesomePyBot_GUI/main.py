@@ -1,5 +1,5 @@
 #Use this import in the virtual environmnet
-from fbs_runtime.application_context.PyQt5 import ApplicationContext
+#from fbs_runtime.application_context.PyQt5 import ApplicationContext
 
 #GUI libraries
 import sys
@@ -103,15 +103,15 @@ class MainWindow(QMainWindow):
             bot.send_message(f"{NAME} left the chat.")
             bot.stop()
 
-"""if __name__ == "__main__":
+if __name__ == "__main__":
     bot = Bot()
     app = QApplication(sys.argv)
     window = MainWindow()
-    sys.exit(app.exec())"""
+    sys.exit(app.exec())
 
 #fbs's structure
-if __name__ == "__main__":
+"""if __name__ == "__main__":
         bot = Bot()
         appctxt = ApplicationContext()
         window = MainWindow()
-        sys.exit(appctxt.app.exec())
+        sys.exit(appctxt.app.exec())"""
