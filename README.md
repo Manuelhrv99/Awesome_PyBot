@@ -6,7 +6,7 @@
 
 Open a command prompt in your project directory and execute the following:
 
-`python -m venv venv`
+`%LOCALAPPDATA%\Programs\Python\Python39\python -m venv venv`
 
 `call venv\Scripts\activate.bat`
 
