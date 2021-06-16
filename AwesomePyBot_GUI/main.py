@@ -1,6 +1,7 @@
 #Use this import in the virtual environmnet
 #from fbs_runtime.application_context.PyQt5 import ApplicationContext
 
+#GUI libraries
 import sys
 import os
 from PySide6 import QtGui
@@ -10,6 +11,7 @@ from PySide6.QtWidgets import *
 
 from py_toggle import PyToggle
 
+#Bot libraries
 from irc.bot import SingleServerIRCBot
 from requests import get
 
