@@ -2,18 +2,18 @@
 
 ## Setup for the virtual environment
 
-> 1st Step
+* 1st Step
 Open a command prompt in your project directory and execute the following:
 `python -m venv venv`
 `call venv\Scripts\activate.bat`
 
-> 2nd Step
+* 2nd Step
 Install the libraries.
 
-> 3rd Step
+* 3rd Step
 Test that the app still works.
 
-> 4th Step
+* 4th Step
 Convert to fbs's project structure.
 Replace
 if __name__ == "__main__":
@@ -37,10 +37,10 @@ Move all the files in the same directory.
 
 `fbs run`
 
-> 5th Step
+* 5th Step
 Create the .exe
 `fbs freeze`
 
-> 6th Step
+* 6th Step
 Crete the installer
 `fbs installer`
