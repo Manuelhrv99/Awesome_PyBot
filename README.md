@@ -14,7 +14,12 @@ Open a command prompt in your project directory and execute the following:
 
 Install the libraries.
 
-`pip install fbs, PyQt5, PySide6, irc, requests, sqlite3, collections, re, datetime, random, time`
+`pip install fbs` 
+`pip install PyQt5`
+`pip install PySide6`
+`pip install irc`
+`pip install requests`
+`pip install datetime`
 
 > 3rd Step
 
