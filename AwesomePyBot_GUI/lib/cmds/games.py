@@ -6,11 +6,9 @@ heist = None
 heist_lock = time()
 
 def coinflip(bot, user, side=None, *args):
-    side = side.lower()
-    opt = ("h", "t", "heads", "tails")
     if side is None:
-        bot.send_message("You need to guess which side of the coin will land. ")
-    elif side not in opt:
+        bot.send_message("You need to guess which side of the coin will land.")
+    elif(side := side.lower()) not in (opt := ("h", "t", "heads", "tails")):
         bot.send_message("Enter one of the following as the side: " + ", ".join(opt))
     else:
         result = choice(("heads", "tails"))
@@ -42,12 +40,11 @@ class Heist(object):
         }
 
     def add_user(self, bot, user, bet):
-        coins = db.field("SELECT Coins FROM users WHERE UserID = ?", user["id"])
         if user in self.users:
             bot.send_message("A heist is alread in progress. You'll have to wait until the next one.")
         elif user in self.users:
             bot.send_message("You're already good to go.")
-        elif bet > coins:
+        elif bet > (coins := db.field("SELECT Coins FROM users WHERE UserID = ?", user["id"])):
             bot.send_message(f"You don't have that much to bet, you only have {coins:,} coins.")
         else:
             db.execute("UPDATE users SET Coins = Coins - ? WHERE UserID = ?",
