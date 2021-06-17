@@ -1,6 +1,12 @@
 from sqlite3 import connect
+#Use this import in the virtual environmnet
+from fbs_runtime.application_context.PyQt5 import ApplicationContext
 
-cxn = connect("./files/database.db", check_same_thread=False)
+appctxt = ApplicationContext()
+DB = appctxt.get_resource("database.db")
+SCRIPT = appctxt.get_resource("script.sql")
+
+cxn = connect(DB, check_same_thread=False)
 cur = cxn.cursor()
 
 def with_commit(func):
@@ -11,7 +17,7 @@ def with_commit(func):
 
 @with_commit
 def build():
-    scriptexec("./files/script.sql")
+    scriptexec(SCRIPT)
 
 def commit():
     cxn.commit()
@@ -21,8 +27,8 @@ def close():
 
 def field(command, *values):
     cur.execute(command, tuple(values))
-
-    if(fetch := cur.fetchone()) is not None:
+    fetch = cur.fetchone()
+    if fetch is not None:
         return fetch[0]
 
 def record(command, *values):

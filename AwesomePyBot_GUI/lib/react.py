@@ -13,23 +13,25 @@ messages = defaultdict(int)
 hello_list = ("Say hi to", "Hail to", "This land is cursed now by", "Oni San UwU", "Take this ( •_•)>⌐■-■")
 
 def process(bot, user, message):
-	update_records(bot, user)
+    update_records(bot, user)
+    match = search(r'cheer[0-9]+', message)
+    h = games.heist
 
-	if user["id"] not in welcomed:
-		welcome(bot, user)
-	elif "bye" in message:
-		say_goodbye(bot, user)
+    if user["id"] not in welcomed:
+	    welcome(bot, user)
+    elif "bye" in message:
+	    say_goodbye(bot, user)
 
-	check_activity(bot, user)
+    check_activity(bot, user)
 
-	if (match := search(r'cheer[0-9]+', message)) is not None:
-		thank_for_cheer(bot, user, match)
+    if match is not None:
+	    thank_for_cheer(bot, user, match)
 
-	if (h := games.heist) is not None:
-		if h.start_time <= time() and not h.running:
-			games.run_heist(bot)
-		elif h.end_time <= time() and h.running:
-			games.end_heist(bot)
+    if h is not None:
+	    if h.start_time <= time() and not h.running:
+		    games.run_heist(bot)
+	    elif h.end_time <= time() and h.running:
+		    games.end_heist(bot)
 
 def add_user(bot, user):
     db.execute("INSERT OR IGNORE INTO users (UserID, UserName) VALUES (?, ?)",
@@ -60,8 +62,9 @@ def say_goodbye(bot, user):
 
 def check_activity(bot, user):
     messages[user["id"]] += 1
+    count = messages[user["id"]]
 
-    if(count := messages[user["id"]]) % 3 == 0:
+    if count % 3 == 0:
         bot.send_message(f"Thanks to the user {user['name']} for being active in the chat. You have sent {count:,} messages! Keep it up!")
 
 def thank_for_cheer(bot, user, match):

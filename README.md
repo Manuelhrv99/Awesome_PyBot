@@ -4,6 +4,8 @@
 
 > 1st Step
 
+Be sure to start in the correct folder.
+
 Open a command prompt in your project directory and execute the following:
 
 `%LOCALAPPDATA%\Programs\Python\Python36\python -m venv venv`
