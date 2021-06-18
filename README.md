@@ -4,4 +4,4 @@
 
 With the commands
 
-`pyinstaller clean --onefile main.spec`
+`pyinstaller main.spec`
