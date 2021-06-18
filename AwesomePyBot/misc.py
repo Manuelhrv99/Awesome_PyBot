@@ -2,7 +2,7 @@ from datetime import timedelta
 from sys import exit
 from time import time
 
-from .. import db
+import main
 
 OWNER = "manuelhrv99"
 BOOT_TIME = time()
@@ -29,8 +29,8 @@ def userinfo(bot, user, *args):
 def shutdown(bot, user, *args):
     if user["name"].lower() == OWNER:
         bot.send_message("Shutting down.")
-        db.commit()
-        db.close()
+        main.commit()
+        main.close()
         bot.disconnect()
         exit(0)
     else:

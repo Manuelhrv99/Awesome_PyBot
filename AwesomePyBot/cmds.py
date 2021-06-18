@@ -1,6 +1,8 @@
-from lib.automod import clear
 from time import time
-from . import misc, economy, games, mod
+import economy
+import games
+import misc
+import mod
 
 PREFIX = "!"
 
@@ -18,7 +20,6 @@ cmds = [
     Cmd(["uptime"], misc.uptime),
     Cmd(["userinfo", "ui"], misc.userinfo),
     Cmd(["shutdown"], misc.shutdown),
-    Cmd(["clear"], misc.clear),
     #Economy
     Cmd(["coins", "money"], economy.coins),
     #Games

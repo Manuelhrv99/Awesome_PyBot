@@ -1,4 +1,4 @@
-from . import db
+import main
 
 CURSES = ("bum", "poo", "you are bad")
 warning_timers = (1, 5, 60)
@@ -17,7 +17,7 @@ def clear(bot, user, message):
     return True
 
 def warn(bot, user, *, reason=None):
-    warnings = db.field("SELECT Warnings FROM users WHERE UserID = ?",
+    warnings = main.field("SELECT Warnings FROM users WHERE UserID = ?",
         user["id"])
 
     if warnings < len(warning_timers):
@@ -25,7 +25,7 @@ def warn(bot, user, *, reason=None):
         bot.send_message(f"/timeout {user['name']} {mins}m")
         bot.send_message(f"{user['name']}, you have been muted for the following reason: {reason}. You will be unmuted in {mins} minute(s).")
 
-        db.execute("UPDATE users SET Warnings = Warnings + 1 WHERE UserID = ?",
+        main.execute("UPDATE users SET Warnings = Warnings + 1 WHERE UserID = ?",
             user["id"])
     else:
         bot.send_message(f"/ban {user['name']} Repeated infractions.")

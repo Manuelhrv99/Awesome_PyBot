@@ -1,20 +1,20 @@
 from random import choice, randint
 from time import time
-from .. import db
+import main
 
 heist = None
 heist_lock = time()
 
 def coinflip(bot, user, side=None, *args):
     if side is None:
-        bot.send_message("You need to guess which side of the coin will land.")
+        bot.send_message("You need to guess which side of the coin will land. h, t, heads, tails")
     elif(side := side.lower()) not in (opt := ("h", "t", "heads", "tails")):
         bot.send_message("Enter one of the following as the side: " + ", ".join(opt))
     else:
         result = choice(("heads", "tails"))
 
         if side[0] == result[0]:
-            db.execute("UPDATE users SET Coins = Coins + 50 WHERE UserID = ?",
+            main.execute("UPDATE users SET Coins = Coins + 50 WHERE UserID = ?",
                 user["id"])
             bot.send_message(f"It landed on {result}. You won 50 coins!")
         else:
@@ -44,10 +44,10 @@ class Heist(object):
             bot.send_message("A heist is alread in progress. You'll have to wait until the next one.")
         elif user in self.users:
             bot.send_message("You're already good to go.")
-        elif bet > (coins := db.field("SELECT Coins FROM users WHERE UserID = ?", user["id"])):
+        elif bet > (coins := main.field("SELECT Coins FROM users WHERE UserID = ?", user["id"])):
             bot.send_message(f"You don't have that much to bet, you only have {coins:,} coins.")
         else:
-            db.execute("UPDATE users SET Coins = Coins - ? WHERE UserID = ?",
+            main.execute("UPDATE users SET Coins = Coins - ? WHERE UserID = ?",
                 bet, user["id"])
             self.users.append((user, bet))
             bot.send_message("You're all suited and ready to go! Stand by for showtime...")
@@ -61,7 +61,7 @@ class Heist(object):
         succeeded = []
         for user, bet in self.users:
             if randint(0, 1):
-                db.execute("UPDATE users SET Coins = Coins + ? WHERE UserID = ?",
+                main.execute("UPDATE users SET Coins = Coins + ? WHERE UserID = ?",
                     bet*1.5, user["id"])
                 succeeded.append((user, bet*1.5))
                 bot.send_message(choice(self.messages["success"]).format(user["name"]))

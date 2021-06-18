@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 from random import randint
 from time import time
 
-from . import db
-from .cmds import games
+import main
+import games
 
 welcomed = []
 messages = defaultdict(int)
@@ -32,21 +32,21 @@ def process(bot, user, message):
 			games.end_heist(bot)
 
 def add_user(bot, user):
-    db.execute("INSERT OR IGNORE INTO users (UserID, UserName) VALUES (?, ?)",
+    main.execute("INSERT OR IGNORE INTO users (UserID, UserName) VALUES (?, ?)",
         user["id"], user["name"].lower())
 
 
 def update_records(bot, user):
-    db.execute("UPDATE users SET UserName = ?, MessageSent = MessageSent + 1 WHERE UserID = ?",
+    main.execute("UPDATE users SET UserName = ?, MessageSent = MessageSent + 1 WHERE UserID = ?",
         user["name"].lower(), user["id"])
 
-    stamp = db.field("SELECT CoinLock FROM users WHERE UserID = ?",
+    stamp = main.field("SELECT CoinLock FROM users WHERE UserID = ?",
         user["id"])
 
     if datetime.strptime(stamp,"%Y-%m-%d %H:%M:%S") < datetime.utcnow():
         coinlock = (datetime.utcnow() + timedelta(seconds=60)).strftime("%Y-%m-%d %H:%M:%S")
         
-        db.execute("UPDATE users SET Coins = Coins + ?, CoinLock = ? WHERE UserID = ?",
+        main.execute("UPDATE users SET Coins = Coins + ?, CoinLock = ? WHERE UserID = ?",
             randint(1, 5), coinlock, user["id"])
 
 #Messages when enter or leave the chat
