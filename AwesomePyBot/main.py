@@ -65,16 +65,16 @@ def scriptexec(filename):
     with open(filename, "r") as script:
         cur.executescript(script.read())
 
-NAME = "TestBotPython"
-OWNER = "manuelhrv99"
+NAME = "<BotName>"
+OWNER = "<OwnerName>"
 
 class Bot(SingleServerIRCBot):
 	def __init__(self):
 		self.HOST = "irc.chat.twitch.tv"
 		self.PORT = 6667
 		self.USERNAME = NAME.lower()
-		self.CLIENT_ID = "kuj9eetu7jixx6rq55g54uj6ptedk0"
-		self.TOKEN = "kvhoytzmtkb117fdyif85mx8t87erc"
+		self.CLIENT_ID = "<ClientID>"
+		self.TOKEN = "<BotToken>"
 		self.CHANNEL = f"#{OWNER}"
 
 		url = f"https://api.twitch.tv/kraken/users?login={self.USERNAME}"
