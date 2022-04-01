@@ -77,11 +77,6 @@ class Bot(SingleServerIRCBot):
 		self.TOKEN = "<BotToken>"
 		self.CHANNEL = f"#{OWNER}"
 
-		url = f"https://api.twitch.tv/kraken/users?login={self.USERNAME}"
-		headers = {"Client-ID": self.CLIENT_ID, "Accept": "application/vnd.twitchtv.v5+json"}
-		resp = get(url, headers=headers).json()
-		self.channel_id = resp["users"][0]["_id"]
-
 		super().__init__([(self.HOST, self.PORT, f"oauth:{self.TOKEN}")], self.USERNAME, self.USERNAME)
 
 	def on_welcome(self, cxn, event):
